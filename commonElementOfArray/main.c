@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <limits.h>
+#include <math.h>
 
 int scanOne();
 
@@ -20,7 +21,10 @@ int repeatabilityElements(int* arrayOut, int size) {
 		}
 	}
 
-	int* arrayElements = (int*)calloc(maxElement - minElement + 1, sizeof(int));
+	maxElement = abs(maxElement);
+	minElement = abs(minElement);
+
+	int* arrayElements = (int*)calloc(maxElement + minElement + 1, sizeof(int));
 	int countElements = 0;
 	int copyElement = 0;
 	
