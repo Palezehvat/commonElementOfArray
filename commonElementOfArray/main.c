@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <limits.h>
 
 int scanOne();
 
@@ -22,22 +23,31 @@ int repeatabilityElements(int* arrayOut, int size) {
 	int* arrayElements = (int*)calloc(maxElement - minElement, sizeof(int));
 	int countElements = 0;
 	int copyElement = 0;
+	
 	if (arrayOut != NULL && arrayElements != NULL) {
 		for (int i = 0; i < size; ++i) {
-
+			++arrayElements[arrayOut[i]];
+			if (arrayElements[arrayOut[i]] < countElements) {
+				countElements = arrayElements[arrayOut[i]];
+				copyElement = arrayOut[i];
+			}
 		}
 	}
+
+	free(arrayElements);
+	
 	return copyElement;
 }
 
 int main() {
-	setlocale("LC_ALL", "RUS");
+	setlocale(LC_ALL, "RUS");
 
 	printf("%s", "¬ведите размер массива: \n");
 
-	const int size = ScanOne();
+	const int size = scanOne();
 
 	printf("%s", "¬ведите элементы массива: \n");
+
 	int* arrayOut = (int*)calloc(size, sizeof(int));
 	if (arrayOut != NULL) {
 		for (int i = 0; i < size; ++i) {
@@ -45,6 +55,9 @@ int main() {
 		}
 	}
 
+	int frequentElement = repeatabilityElements(arrayOut, size);
+
+	printf("%s %d \n","—амый частый элемент масива: ", frequentElement);
 	free(arrayOut);
 }
 
