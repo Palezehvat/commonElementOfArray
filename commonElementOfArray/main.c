@@ -6,6 +6,7 @@
 #include <stdbool.h>
 
 int scanOne();
+int repeatabilityElements(int* arrayOut, int size);
 
 bool testTypicalValue() {
 	int arrayOut1[5] = { 1, 2, 2, 3, 4 };
