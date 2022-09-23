@@ -3,8 +3,20 @@
 #include <locale.h>
 #include <limits.h>
 #include <math.h>
+#include <stdbool.h>
 
 int scanOne();
+
+bool testTypicalValue() {
+	int arrayOut1[5] = { 1, 2, 2, 3, 4 };
+	int arrayOut2[5] = { -200, -20, -30, -30, 100 };
+	return repeatabilityElements(arrayOut1, 5) == 2 && repeatabilityElements(arrayOut2, 5) == -30;
+}
+
+bool testAnotherValue() {
+	int arrayOut[1] = { 1 };
+	return repeatabilityElements(arrayOut, 1) == 1;
+}
 
 int repeatabilityElements(int* arrayOut, int size) {
 	int maxElement = INT_MIN;
@@ -45,6 +57,11 @@ int repeatabilityElements(int* arrayOut, int size) {
 
 int main() {
 	setlocale(LC_ALL, "RUS");
+	if (!testAnotherValue() || !testTypicalValue()) {
+		printf("%s", "ќшибки в тестах... \n");
+	} else {
+		printf("%s", "ќшибок в тестах не обнаруженно \n");
+	}
 
 	printf("%s", "¬ведите размер массива: \n");
 
