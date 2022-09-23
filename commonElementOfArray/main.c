@@ -20,15 +20,15 @@ int repeatabilityElements(int* arrayOut, int size) {
 		}
 	}
 
-	int* arrayElements = (int*)calloc(maxElement - minElement, sizeof(int));
+	int* arrayElements = (int*)calloc(maxElement - minElement + 1, sizeof(int));
 	int countElements = 0;
 	int copyElement = 0;
 	
 	if (arrayOut != NULL && arrayElements != NULL) {
 		for (int i = 0; i < size; ++i) {
-			++arrayElements[arrayOut[i]];
-			if (arrayElements[arrayOut[i]] < countElements) {
-				countElements = arrayElements[arrayOut[i]];
+			++arrayElements[arrayOut[i] + minElement];
+			if (arrayElements[arrayOut[i] + minElement] > countElements) {
+				countElements = arrayElements[arrayOut[i] + minElement];
 				copyElement = arrayOut[i];
 			}
 		}
