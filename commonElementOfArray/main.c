@@ -4,6 +4,32 @@
 
 int scanOne();
 
+int repeatabilityElements(int* arrayOut, int size) {
+	int maxElement = INT_MIN;
+	int minElement = INT_MAX;
+
+	if (arrayOut != NULL) {
+		for (int i = 0; i < size; ++i) {
+			if (arrayOut[i] < minElement) {
+				minElement = arrayOut[i];
+			}
+			if (arrayOut[i] > maxElement) {
+				maxElement = arrayOut[i];
+			}
+		}
+	}
+
+	int* arrayElements = (int*)calloc(maxElement - minElement, sizeof(int));
+	int countElements = 0;
+	int copyElement = 0;
+	if (arrayOut != NULL && arrayElements != NULL) {
+		for (int i = 0; i < size; ++i) {
+
+		}
+	}
+	return copyElement;
+}
+
 int main() {
 	setlocale("LC_ALL", "RUS");
 
@@ -13,9 +39,13 @@ int main() {
 
 	printf("%s", "¬ведите элементы массива: \n");
 	int* arrayOut = (int*)calloc(size, sizeof(int));
-	for (int i = 0; i < size; ++i) {
-		arrayOut[i] = scanOne();
+	if (arrayOut != NULL) {
+		for (int i = 0; i < size; ++i) {
+			arrayOut[i] = scanOne();
+		}
 	}
+
+	free(arrayOut);
 }
 
 int scanOne() {
